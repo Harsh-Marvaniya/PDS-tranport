@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const SchemeForm = ({ onClose, onSave, editData }) => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const initialState = { scheme_name: "", scheme_status: "Start" };
   const [formData, setFormData] = useState(initialState);
 
@@ -30,8 +31,8 @@ const SchemeForm = ({ onClose, onSave, editData }) => {
 
     const method = editData ? "PUT" : "POST";
     const url = editData
-      ? `http://localhost:5000/api/scheme/${editData.scheme_id}`
-      : "http://localhost:5000/api/scheme";
+      ? `${API_URL}/scheme/${editData.scheme_id}`
+      : `${API_URL}/scheme`;
 
     try {
       const response = await fetch(url, {

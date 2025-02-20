@@ -8,7 +8,10 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONT_URL, 
+  credentials: true
+  }));
 
 // JWT Secret Key
 const secretKey = process.env.JWT_SECRET || "be5c701d7b261e7cec659a9e361dcded66544da8c1c0930ac57a600d8fbba17f9895fd3f173c1f11608ef295c7ddce94c27338d94e39365ccb35069c18587a1933da8d3c608aa2d2f22a4bee67c55ce14cae2f82a735f4b406a576ec23088cdd0b2682fda5da3f1a4aaddf5f57e804f59773f625c2684dc830b5f42dbc60df496c03994665b46b73fb6a0829e4ac3d7e017fcdaed512288e9ce72eb88726a473bab260d1729e874b988d8c6217e3c8003cf9701b97cc3b2d0299c8fbbace8846e74fcc472536bc04866b2d6ff081c4752e221cf84303cf7da1f4ce0905fced8d";
@@ -17,8 +20,9 @@ const secretKey = process.env.JWT_SECRET || "be5c701d7b261e7cec659a9e361dcded665
 const db = mysql.createConnection({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "",
+  password: process.env.DB_PASS || "",
   database: process.env.DB_NAME || "pdsmanagement",
+  port: process.env.DB_PORT || 3306,
 });
 
 db.connect((err) => {

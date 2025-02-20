@@ -8,11 +8,12 @@ const CategoryPage = () => {
   const [editData, setEditData] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/categories");
+      const response = await fetch(`${API_URL}/categories`);
       if (!response.ok) throw new Error("Failed to fetch categories");
 
       const data = await response.json();
@@ -32,7 +33,7 @@ const CategoryPage = () => {
     if (!window.confirm("Are you sure you want to delete this category?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/categories/${id}`, { method: "DELETE" });
+      const response = await fetch(`FRONT_URL/categories/${id}`, { method: "DELETE" });
       if (response.ok) {
         alert("Category deleted successfully!");
         fetchCategories();

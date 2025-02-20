@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import GrainForm from "./GrainForm";
 
 const GrainPage = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [grains, setGrains] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +13,7 @@ const GrainPage = () => {
   // ✅ Fetch grains from backend
   const fetchGrains = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/grains");
+      const response = await fetch(`${API_URL}/grains`);
       if (!response.ok) throw new Error("Failed to fetch data");
       const data = await response.json();
       setGrains(data || []);
@@ -31,7 +32,7 @@ const GrainPage = () => {
   const handleDelete = async (uuid) => {
     if (!window.confirm("Are you sure you want to delete this grain?")) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/grains/${uuid}`, {
+      const response = await fetch(`${API_URL}/grains/${uuid}`, {
         method: "DELETE",
       });
       if (response.ok) {

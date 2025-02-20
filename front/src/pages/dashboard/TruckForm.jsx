@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 
 const TruckForm = ({ onClose, onSave, editData }) => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [truck, setTruck] = useState({
     truck_name: "",
     truck_status: "Active", // Default value
@@ -77,8 +78,8 @@ const TruckForm = ({ onClose, onSave, editData }) => {
     try {
       const response = await fetch(
         editData
-          ? `http://localhost:5000/api/truck/${editData.uuid}`
-          : "http://localhost:5000/api/truck",
+          ? `${API_URL}/truck/${editData.uuid}`
+          : `${API_URL}/truck`,
         {
           method: editData ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },

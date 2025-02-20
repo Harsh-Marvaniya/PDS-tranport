@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import OwnerNameForm from "./OwnerNameForm";
 
 const OwnerNamePage = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [owners, setOwners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +13,7 @@ const OwnerNamePage = () => {
   // ✅ Fetch owners from backend
   const fetchOwners = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/owners");
+      const response = await fetch(`${API_URL}/owners`);
       if (!response.ok) throw new Error("Failed to fetch data");
       const data = await response.json();
       setOwners(data || []);
@@ -31,7 +32,7 @@ const OwnerNamePage = () => {
   const handleDelete = async (uuid) => {
     if (!window.confirm("Are you sure you want to delete this owner?")) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/owners/${uuid}`, {
+      const response = await fetch(`${API_URL}/owners/${uuid}`, {
         method: "DELETE",
       });
       if (response.ok) {

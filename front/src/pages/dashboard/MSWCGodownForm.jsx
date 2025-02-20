@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const MSWCGodownForm = ({ onClose, onSave, editData }) => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     godownName: "",
     godownUnder: "",
@@ -38,8 +39,8 @@ const MSWCGodownForm = ({ onClose, onSave, editData }) => {
     try {
       const response = await fetch(
         editData
-          ? `http://localhost:5000/api/mswcgodown/${editData.uuid}`
-          : "http://localhost:5000/api/mswcgodown",
+          ? `${API_URL}/mswcgodown/${editData.uuid}`
+          : `${API_URL}/mswcgodown`,
         {
           method: editData ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },

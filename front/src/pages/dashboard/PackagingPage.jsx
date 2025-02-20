@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PackagingForm from "./PackagingForm";
 
 const PackagingPage = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [packagingList, setPackagingList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +12,7 @@ const PackagingPage = () => {
 
   const fetchPackaging = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/packaging");
+      const response = await fetch(`${API_URL}/packaging`);
       if (!response.ok) throw new Error("Failed to fetch packaging records");
       const data = await response.json();
       setPackagingList(data || []);
@@ -29,7 +30,7 @@ const PackagingPage = () => {
   const handleDelete = async (pack_id) => {
     if (!window.confirm("Are you sure you want to delete this packaging record?")) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/packaging/${pack_id}`, {
+      const response = await fetch(`${API_URL}/packaging/${pack_id}`, {
         method: "DELETE",
       });
       if (response.ok) {

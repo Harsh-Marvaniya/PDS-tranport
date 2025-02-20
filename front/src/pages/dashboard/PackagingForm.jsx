@@ -33,8 +33,8 @@ const PackagingForm = ({ onClose, onSave, editData }) => {
     try {
       const response = await fetch(
         editData
-          ? `http://localhost:5000/api/packaging/${editData.pack_id}`
-          : "http://localhost:5000/api/packaging",
+          ? `${API_URL}/packaging/${editData.pack_id}`
+          : `${API_URL}/packaging`,
         {
           method: editData ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },

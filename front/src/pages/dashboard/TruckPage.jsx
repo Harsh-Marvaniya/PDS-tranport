@@ -3,6 +3,7 @@ import TruckForm from "./TruckForm";
 import { formatDate } from "@/util/libs/formatDate";
 
 const TruckPage = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [trucks, setTrucks] = useState([]);
   const [loading, setLoading] = useState();
   const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ const TruckPage = () => {
 
   const fetchTrucks = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/truck");
+      const response = await fetch(`${API_URL}/truck`);
       if (!response.ok) throw new Error("Failed to fetch data");
 
       const data = await response.json();
@@ -33,7 +34,7 @@ const TruckPage = () => {
     if (!window.confirm("Are you sure you want to delete this truck?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/truck/${uuid}`, {
+      const response = await fetch(`${API_URL}/truck/${uuid}`, {
         method: "DELETE",
       });
 

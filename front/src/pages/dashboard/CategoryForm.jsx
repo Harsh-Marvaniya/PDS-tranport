@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const CategoryForm = ({ onClose, onSave, editData }) => {
+
+  const API_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     category_name: "",
     status: "Active",
@@ -32,8 +34,8 @@ const CategoryForm = ({ onClose, onSave, editData }) => {
 
     const method = editData ? "PUT" : "POST";
     const url = editData
-      ? `http://localhost:5000/api/categories/${editData.uuid}`
-      : "http://localhost:5000/api/categories";
+      ? `${API_URL}/categories/${editData.uuid}`
+      : `${API_URL}/categories`;
 
     try {
       const response = await fetch(url, {

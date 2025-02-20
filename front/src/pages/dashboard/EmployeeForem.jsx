@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const EmployeeForm = ({ onClose, onSave }) => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     category: "",
     fullName: "",
@@ -26,7 +27,7 @@ const EmployeeForm = ({ onClose, onSave }) => {
     if (!isFormValid) return;
   
     try {
-      const response = await fetch("http://localhost:5000/employees", {
+      const response = await fetch(`${API_URL}/employees`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

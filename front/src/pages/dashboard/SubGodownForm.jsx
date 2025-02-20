@@ -204,6 +204,7 @@
 import React, { useState, useEffect } from "react";
 
 const SubGodownForm = ({ onClose, onSave, editData }) => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     parentGodown: "",
     subGodown: "",
@@ -219,7 +220,7 @@ const SubGodownForm = ({ onClose, onSave, editData }) => {
   useEffect(() => {
     const fetchGodowns = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/godowns");
+        const response = await fetch(`${API_URL}/godowns`);
         if (!response.ok) throw new Error("Failed to fetch godowns");
 
         const data = await response.json();
@@ -274,8 +275,8 @@ const SubGodownForm = ({ onClose, onSave, editData }) => {
     try {
       const response = await fetch(
         editData
-          ? `http://localhost:5000/api/subgodown/${editData.uuid}`
-          : "http://localhost:5000/api/subgodown",
+          ? `${API_URL}/subgodown/${editData.uuid}`
+          : `${API_URL}/subgodown`,
         {
           method: editData ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },

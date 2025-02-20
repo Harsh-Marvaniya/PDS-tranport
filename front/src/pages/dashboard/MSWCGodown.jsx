@@ -10,8 +10,9 @@ const MSWCGodownPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchGodowns = async () => {
+    const API_URL = import.meta.env.VITE_API_URL;
     try {
-      const response = await fetch("http://localhost:5000/api/mswcgodown");
+      const response = await fetch(`${API_URL}/mswcgodown`);
       if (!response.ok) throw new Error("Failed to fetch data");
 
       const data = await response.json();
@@ -31,7 +32,7 @@ const MSWCGodownPage = () => {
     if (!window.confirm("Are you sure you want to delete this godown?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/mswcgodown/${uuid}`, {
+      const response = await fetch(`${API_URL}/mswcgodown/${uuid}`, {
         method: "DELETE",
       });
 
