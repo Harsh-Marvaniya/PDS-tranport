@@ -121,6 +121,8 @@ export function MaterialTailwindControllerProvider({ children }) {
     fixedNavbar: false,
     openConfigurator: false,
   };
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   const [controller, dispatch] = useReducer(reducer, initialState);
 
@@ -143,7 +145,7 @@ export function MaterialTailwindControllerProvider({ children }) {
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/getRowCounts");
+        const response = await fetch(`${API_URL}/getRowCounts`);
         const data = await response.json();
         setStatistics(data);
       } catch (error) {
